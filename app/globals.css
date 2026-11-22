@@ -356,6 +356,7 @@ summary:focus-visible {
   inline-size: 1px;
   block-size: 1px;
   opacity: 0;
+  pointer-events: none;
 }
 .layer-number {
   color: var(--accent);
