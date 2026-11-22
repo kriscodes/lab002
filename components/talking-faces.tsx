@@ -63,7 +63,7 @@ export function TalkingFaces() {
 
     setError('');
     if (player.error) player.load();
-    if (player.ended) seek(0);
+    if (player.ended || player.currentTime >= miraScene.duration) seek(0);
 
     try {
       await player.play();
@@ -79,7 +79,6 @@ export function TalkingFaces() {
         <div className="stage" data-layer={layer}>
           <div className="stage-top" aria-hidden="true">
             <span>MIRA</span>
-            {layer !== 'mouth' && <span className="expression">{frame.expression}</span>}
           </div>
           <div className="stage-target" aria-hidden="true" />
           {layer === 'keyboard' ? (
@@ -127,7 +126,7 @@ export function TalkingFaces() {
             type="button"
             aria-label="Mute audio"
             aria-pressed={muted}
-            onClick={() => setMuted(!muted)}
+            onClick={() => setMuted((wasMuted) => !wasMuted)}
           >
             <span className="speaker-icon" aria-hidden="true" />
             <span className="speaker-wave" aria-hidden="true" />
@@ -187,6 +186,7 @@ export function TalkingFaces() {
           setPlaying(false);
           setTime(event.currentTarget.currentTime);
         }}
+        onLoadedMetadata={(event) => setTime(event.currentTarget.currentTime)}
         onSeeked={(event) => setTime(event.currentTarget.currentTime)}
         onTimeUpdate={(event) => setTime(event.currentTarget.currentTime)}
         onError={() => setError('The scene audio couldn’t load. Try playing it again.')}

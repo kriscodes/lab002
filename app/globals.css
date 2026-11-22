@@ -87,6 +87,7 @@ summary:focus-visible {
 .stage {
   position: relative;
   isolation: isolate;
+  width: 100%;
   display: grid;
   place-items: center;
   min-height: 270px;
@@ -121,13 +122,6 @@ summary:focus-visible {
   pointer-events: none;
   font: 700 0.8125rem var(--mono);
   letter-spacing: 0.12em;
-}
-.expression {
-  border: 1px solid currentColor;
-  border-radius: 999px;
-  padding: 5px 10px;
-  text-transform: capitalize;
-  letter-spacing: 0;
 }
 .stage-target {
   position: absolute;
@@ -446,6 +440,25 @@ summary:focus-visible {
   }
   .keyboard-face {
     font-size: clamp(0.9rem, 3.4vw, 1.4rem);
+  }
+  .layer-picker {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 7px;
+  }
+  .layer-option {
+    display: flex;
+    justify-content: center;
+    min-height: 48px;
+    padding: 7px;
+    text-align: center;
+  }
+  .layer-name {
+    font-size: 0.875rem;
+  }
+  .layer-number,
+  .layer-description,
+  .radio-mark {
+    display: none;
   }
 }
 
